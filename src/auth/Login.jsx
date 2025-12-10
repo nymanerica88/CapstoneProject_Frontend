@@ -35,7 +35,7 @@ export default function Login() {
           Password
           <input type="password" name="password" required />
         </label>
-        <button>Login</button>
+        <button>Log In</button>
         {error && <output>{error}</output>}
       </form>
       <Link to="/register">Need an account? Register here.</Link>
