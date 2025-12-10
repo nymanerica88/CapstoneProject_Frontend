@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
-
 import { useAuth } from "./AuthContext";
+import "../CSSlogin.css";
 
 /** A form that allows users to log into an existing account. */
 export default function Login() {
@@ -17,14 +17,14 @@ export default function Login() {
       await login({ username, password });
       navigate("/");
     } catch (e) {
-      setError(e.message);
+      setError(e.message || "Login Failed");
     }
   };
 
   return (
-    <>
+    <section className="login">
       <h1>Log in to your account</h1>
-      <form action={onLogin}>
+      <form onSubmit={onLogin}>
         <label>
           Username
           <input type="username" name="username" required />
@@ -37,6 +37,6 @@ export default function Login() {
         {error && <output>{error}</output>}
       </form>
       <Link to="/register">Need an account? Register here.</Link>
-    </>
+    </section>
   );
 }
