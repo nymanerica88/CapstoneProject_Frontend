@@ -30,7 +30,7 @@ export default function Register() {
     <section className="register">
       <h1>Welcome to Tab Tabulations!</h1>
       <p>
-        Split bills with peers, family, and friends easily with out built in tab
+        Split bills with peers, family, and friends easily with our built in tab
         calculator. Users can enter the bill total, choose a bill split type,
         and quickly calculate what each individual owes on the group bill!
       </p>
