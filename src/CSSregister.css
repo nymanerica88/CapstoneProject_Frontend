@@ -1,0 +1,190 @@
+/* ====== Page Setup: Center content vertically and horizontally ====== */
+body,
+html {
+  height: 100%;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center; /* horizontal center */
+  align-items: center; /* vertical center */
+  background-color: #f0f2f5; /* light background */
+}
+
+/* ====== Navbar ====== */
+#navbar {
+  display: flex;
+  justify-content: space-between; /* brand on left, nav items on right */
+  align-items: center;
+  background-color: orange; /* same as buttons */
+  color: white;
+  padding: 10px 20px;
+  width: 90%; /* match .register width */
+  max-width: 800px; /* same max-width as .register */
+  margin: 0 auto 40px; /* center horizontally and spacing below */
+  box-sizing: border-box;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 12px 12px 0 0; /* optional: rounded top corners */
+}
+
+/* Brand styling */
+#navbar #brand p {
+  margin: 0;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: white;
+  text-decoration: none;
+}
+
+/* Nav items */
+#navbar nav {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Nav links */
+#navbar nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 6px 10px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+#navbar nav a:hover {
+  background-color: darkorange;
+}
+
+/* Logout button in navbar */
+#navbar nav button {
+  background-color: white;
+  color: orange;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+#navbar nav button:hover {
+  background-color: darkorange;
+  color: white;
+}
+
+/* ====== Registration Section ====== */
+.register {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  padding: 40px 50px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  width: 90%; /* responsive width */
+  max-width: 800px; /* match navbar max-width */
+  gap: 20px; /* spacing between headings, form, link */
+  text-align: left; /* left-align label text */
+  margin: 0 auto; /* center section horizontally */
+  box-sizing: border-box;
+}
+
+/* Headings and paragraph inside section */
+.register h1,
+.register h2,
+.register p {
+  margin: 0;
+  width: 100%;
+  text-align: center; /* headings centered */
+}
+
+.register p {
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+/* Form styling */
+.register form {
+  display: flex;
+  flex-direction: column;
+  width: 100%; /* fill section width */
+  max-width: 600px; /* optional: narrower than section */
+  gap: 15px;
+  margin: 0 auto; /* center form inside section */
+}
+
+/* Labels on top of inputs */
+.register label {
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+  width: 100%;
+  text-align: left; /* label text left-aligned */
+}
+
+/* Input fields */
+.register input {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  margin-top: 5px;
+  font-size: 1rem;
+  width: 100%; /* fill label width */
+}
+
+/* Register button */
+.register button {
+  background-color: orange; /* orange button */
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+  margin-top: 10px;
+  transition: background-color 0.2s;
+  width: 100%; /* button fills form width */
+}
+
+.register button:hover {
+  background-color: darkorange;
+}
+
+/* Error messages */
+.register output {
+  color: red;
+  font-weight: bold;
+  margin-top: 10px;
+  text-align: center;
+}
+
+/* Links under form */
+.register a {
+  margin-top: 15px;
+  color: #007bff;
+  text-decoration: none;
+  width: 100%;
+  display: inline-block;
+  text-align: center;
+}
+
+.register a:hover {
+  text-decoration: underline;
+}
+
+/* ====== Responsive adjustments ====== */
+@media (max-width: 500px) {
+  .register {
+    padding: 30px 20px;
+    width: 95%;
+  }
+
+  #navbar {
+    padding: 10px 15px;
+    width: 95%;
+  }
+}
