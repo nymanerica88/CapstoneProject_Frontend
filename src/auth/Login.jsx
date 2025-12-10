@@ -10,7 +10,9 @@ export default function Login() {
 
   const [error, setError] = useState(null);
 
-  const onLogin = async (formData) => {
+  const onLogin = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
     const username = formData.get("username");
     const password = formData.get("password");
     try {
