@@ -1,0 +1,9 @@
+/* Make the image EXACTLY the same width as the navbar */
+.homepage img {
+  display: block;
+  width: 90%; /* match navbar width */
+  max-width: 800px; /* match navbar max-width */
+  margin: 0 auto; /* center it the same way */
+  border-radius: 0 0 12px 12px; /* optional: match the navbar rounded top */
+  height: auto;
+}
