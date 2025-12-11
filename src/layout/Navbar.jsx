@@ -1,9 +1,10 @@
-import { NavLink } from "react-router";
-
+import { NavLink, useLocation } from "react-router";
 import { useAuth } from "../auth/AuthContext";
 
 export default function Navbar() {
   const { token, logout } = useAuth();
+  const { pathname } = useLocation();
+
   return (
     <header id="navbar">
       <NavLink id="brand" to="/">
@@ -13,7 +14,16 @@ export default function Navbar() {
         {token ? (
           <button onClick={logout}>Log out</button>
         ) : (
-          <NavLink to="/login">Log in</NavLink>
+          <>
+            {pathname === "/" && (
+              <>
+                <NavLink to="/register">Register</NavLink>
+                <NavLink to="/login">Log In</NavLink>
+              </>
+            )}
+            {pathname === "/register" && <NavLink to="/login">Log In</NavLink>}
+            {pathname === "/login" && <NavLink to="register">Register</NavLink>}
+          </>
         )}
       </nav>
     </header>
