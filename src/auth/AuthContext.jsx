@@ -18,6 +18,7 @@ export function AuthProvider({ children }) {
       body: JSON.stringify(credentials),
     });
     const result = await response.text();
+    console.log(result);
     if (!response.ok) throw Error(result);
     setToken(result);
   };
