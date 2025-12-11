@@ -18,6 +18,7 @@ export default function Register() {
     const email = formData.get("email");
     const username = formData.get("username");
     const password = formData.get("password");
+    console.log({ first_name, last_name, email, username, password });
     try {
       await register({ first_name, last_name, email, username, password });
       navigate("/");
