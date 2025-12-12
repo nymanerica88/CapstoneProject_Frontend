@@ -1,9 +1,15 @@
-import { NavLink, useLocation } from "react-router";
+import { NavLink, useLocation, useNavigate } from "react-router";
 import { useAuth } from "../auth/AuthContext";
 
 export default function Navbar() {
   const { token, logout } = useAuth();
   const { pathname } = useLocation();
+  const navigate = useNavigate();
+
+  const logoutRedirect = () => {
+    logout();
+    navigate("/");
+  };
 
   return (
     <header id="navbar">
@@ -12,7 +18,7 @@ export default function Navbar() {
       </NavLink>
       <nav>
         {token ? (
-          <button onClick={logout}>Log out</button>
+          <button onClick={logoutRedirect}>Log out</button>
         ) : (
           <>
             {pathname === "/" && (
