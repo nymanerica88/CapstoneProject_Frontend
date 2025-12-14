@@ -11,7 +11,7 @@ export default function App() {
         <Route index element={null} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/profile/:guest_id" element={<Profile />} />
+        <Route path="/profile" element={<Profile />} />
       </Route>
     </Routes>
   );
