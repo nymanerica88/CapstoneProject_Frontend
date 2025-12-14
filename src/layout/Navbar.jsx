@@ -13,12 +13,22 @@ export default function Navbar() {
 
   return (
     <header id="navbar">
-      <NavLink id="brand" to="/">
-        <p>Capstone Project Cover</p>
-      </NavLink>
+      {token ? (
+        <p id="brand">Tab Tabulations</p>
+      ) : (
+        <NavLink id="brand" to="/">
+          <p>Capstone Project Cover</p>
+        </NavLink>
+      )}
+
       <nav>
         {token ? (
-          <button onClick={logoutRedirect}>Log out</button>
+          <>
+            {pathname === "/profile" && (
+              <NavLink to="/new_bill">Add Bill</NavLink>
+            )}
+            <button onClick={logoutRedirect}>Log out</button>
+          </>
         ) : (
           <>
             {pathname === "/" && (
