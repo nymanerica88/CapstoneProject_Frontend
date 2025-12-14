@@ -10,69 +10,6 @@ html {
   background-color: #f0f2f5; /* light background */
 }
 
-/* ====== Navbar ====== */
-#navbar {
-  display: flex;
-  justify-content: space-between; /* brand on left, nav items on right */
-  align-items: center;
-  background-color: orange; /* same as buttons */
-  color: white;
-  padding: 10px 20px;
-  width: 90%; /* match .register width */
-  max-width: 800px; /* same max-width as .register */
-  margin: 0 auto 40px; /* center horizontally and spacing below */
-  box-sizing: border-box;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 12px 12px 0 0; /* optional: rounded top corners */
-}
-
-/* Brand styling */
-#navbar #brand p {
-  margin: 0;
-  font-weight: bold;
-  font-size: 1.2rem;
-  color: white;
-  text-decoration: none;
-}
-
-/* Nav items */
-#navbar nav {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-/* Nav links */
-#navbar nav a {
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-  padding: 6px 10px;
-  border-radius: 4px;
-  transition: background-color 0.2s;
-}
-
-#navbar nav a:hover {
-  background-color: darkorange;
-}
-
-/* Logout button in navbar */
-#navbar nav button {
-  background-color: white;
-  color: orange;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 4px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.2s, color 0.2s;
-}
-
-#navbar nav button:hover {
-  background-color: darkorange;
-  color: white;
-}
-
 /* ====== Registration Section ====== */
 .register {
   display: flex;
