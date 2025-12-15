@@ -27,6 +27,9 @@ export default function Navbar() {
             {pathname === "/profile" && (
               <NavLink to="/bills/new">Add Bill</NavLink>
             )}
+            {pathname === "/bills/new" && (
+              <NavLink to="/profile">Profile</NavLink>
+            )}
             <button onClick={logoutRedirect}>Log out</button>
           </>
         ) : (
