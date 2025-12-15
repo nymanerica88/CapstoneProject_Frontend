@@ -7,6 +7,10 @@ export default function NewBill() {
   const { token } = useAuth();
   const navigate = useNavigate();
 
+  if (!token) {
+    return <p>You must be logged in to add a bill</p>;
+  }
+
   const [refNum, setRefNum] = useState("");
   const [total, setTotal] = useState("");
   const [guestCount, setGuestCount] = useState(1);
@@ -75,6 +79,47 @@ export default function NewBill() {
       amount: totalNumber * (percentages[index] || 0),
     }));
   }, [percentages, guests, totalNumber]);
+
+  const handleSubmit = async () => {
+    const payload = {
+      ref_num: refNum,
+      total: totalNumber,
+      split_type: splitType,
+      guests: guests,
+      items:
+        splitType === "per_item"
+          ? items.map((item) => ({
+              name: item.name,
+              quantity: Number(item.quantity),
+              price: Number(item.price),
+              guest_id: item.guestIndex,
+            }))
+          : [],
+
+      percentages:
+        splitType === "percentage"
+          ? percentages.map((percent, index) => ({
+              guest_id: index,
+              percent: percent,
+            }))
+          : [],
+    };
+
+    const response = await fetch(`${import.meta.env.VITE_API}/bills`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+      body: JSON.stringify(payload),
+    });
+    if (response.ok) {
+      navigate("/profile");
+    } else {
+      const text = await response.text();
+      alert(text);
+    }
+  };
 
   console.log("NewBill rendered");
   return (
