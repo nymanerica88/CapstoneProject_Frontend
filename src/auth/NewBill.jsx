@@ -1,9 +1,9 @@
 import { useState, useMemo } from "react";
 import { useNavigate } from "react-router";
 import { useAuth } from "../auth/AuthContext";
-import "../CSSnewbills.css";
+import "../CSSnewbill.css";
 
-export default function Bills() {
+export default function NewBill() {
   const { token } = useAuth();
   const navigate = useNavigate();
 
@@ -18,23 +18,31 @@ export default function Bills() {
   const [percentages, setPercentages] = useState([]);
   const totalNumber = Number(total) || 0;
 
-  function updateGuest(index, value) {
+  const updateGuest = (index, value) => {
     const copy = [...guests];
     copy[index] = value;
     setGuests(copy);
-  }
+  };
 
-  function updateGuestCount(count) {
+  const updateGuestCount = (count) => {
     setGuestCount(count);
-    setGuests(
-      Array.from({ length: count }, function () {
-        return "";
-      })
-    );
-    setPercentages(
-      Array.from({ length: count }, function () {
-        return 0;
-      })
-    );
-  }
+    setGuests(Array.from({ length: count }, () => ""));
+    setPercentages(Array.from({ length: count }, () => 0));
+  };
+
+  const updateItem = (index, field, value) => {
+    const copy = [...items];
+    copy[index][field] = value;
+    setItems(copy);
+  };
+
+  const addItem = () => {
+    setItems([...items, { name: "", quantity: 1, price: "", guestIndex: 0 }]);
+  };
+  console.log("NewBill rendered");
+  return (
+    <section>
+      <h1> Add New Bill</h1>
+    </section>
+  );
 }
