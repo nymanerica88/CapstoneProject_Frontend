@@ -121,10 +121,31 @@ export default function NewBill() {
     }
   };
 
-  console.log("NewBill rendered");
   return (
-    <section>
-      <h1> Add New Bill</h1>
-    </section>
+    <>
+      <section className="bill-details">
+        <h2> Bill Details</h2>
+        <input
+          placeholder="Bill Ref Number"
+          value={refNum}
+          onChange={(event) => setRefNum(event.target.value)}
+        />
+
+        <input
+          type="number"
+          placeholder="Total Bill Amount"
+          value={total}
+          onChange={(event) => setTotal(event.target.value)}
+        />
+
+        <input
+          type="number"
+          min="1"
+          placeholder="Total # of Guests"
+          value={guestCount}
+          onChange={(event) => updateGuestCount(Number(event.target.value))}
+        />
+      </section>
+    </>
   );
 }
