@@ -25,7 +25,7 @@ export default function Navbar() {
         {token ? (
           <>
             {pathname === "/profile" && (
-              <NavLink to="/new_bill">Add Bill</NavLink>
+              <NavLink to="/bills/new">Add Bill</NavLink>
             )}
             <button onClick={logoutRedirect}>Log out</button>
           </>
