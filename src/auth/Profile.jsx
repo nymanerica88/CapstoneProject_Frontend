@@ -77,12 +77,12 @@ export default function Profile() {
         />
       </section>
 
-      <div className="profile-total">
+      <section className="profile-total">
         <h3>Total amount owed:</h3>
         <p>${Number(totalOwed).toFixed(2)}</p>
-      </div>
+      </section>
 
-      <div className="profile-bills">
+      <section className="profile-bills">
         {bills.map((bill) => (
           <button
             key={bill.ref_num}
@@ -100,7 +100,7 @@ export default function Profile() {
             </span>
           </button>
         ))}
-      </div>
+      </section>
     </section>
   );
 }
