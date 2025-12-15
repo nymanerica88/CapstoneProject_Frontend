@@ -4,7 +4,7 @@ import { useAuth } from "../auth/AuthContext";
 import "../CSSnewbill.css";
 
 export default function NewBill() {
-  const { token } = useAuth();
+  const { token, user } = useAuth();
   const navigate = useNavigate();
 
   if (!token) {
@@ -14,7 +14,9 @@ export default function NewBill() {
   const [refNum, setRefNum] = useState("");
   const [total, setTotal] = useState("");
   const [guestCount, setGuestCount] = useState(1);
-  const [guests, setGuests] = useState([""]);
+  const [guests, setGuests] = useState(
+    user ? [`${user.first_name} ${user.last_name}`] : []
+  );
   const [splitType, setSplitType] = useState("even");
   const [items, setItems] = useState([
     { name: "", quantity: 1, price: "", guestIndex: 0 },
@@ -30,7 +32,16 @@ export default function NewBill() {
 
   const updateGuestCount = (count) => {
     setGuestCount(count);
-    setGuests(Array.from({ length: count }, () => ""));
+    setGuests((prevGuests) => {
+      const userGuest = prevGuests[0];
+
+      const additionalGuests = Array.from(
+        { length: Math.max(count - 1, 0) },
+        (_, index) => prevGuests[index + 1] || ""
+      );
+      return [userGuest, ...additionalGuests];
+    });
+    // setGuests(Array.from({ length: count }, () => ""));
     setPercentages(Array.from({ length: count }, () => 0));
   };
 
