@@ -146,6 +146,51 @@ export default function NewBill() {
           onChange={(event) => updateGuestCount(Number(event.target.value))}
         />
       </section>
+
+      {/* <section className="guest-names">
+        <h2>Guest Names</h2>
+        {guests.map((guestName, index) => (
+          <input
+            key={index}
+            placeholder="guest_name"
+            value={guestName}
+            onChange={(event) => updatedGuest(index, event.target.value)}
+          />
+        ))}
+      </section> */}
+
+      <section className="split-type">
+        <h2>Split Type</h2>
+        <label>
+          <input
+            type="radio"
+            value="even"
+            checked={splitType === "even"}
+            onChange={() => setSplitType("even")}
+          />
+          Even
+        </label>
+
+        <label>
+          <input
+            type="radio"
+            value="per_item"
+            checked={splitType === "per_item"}
+            onChange={() => setSplitType("per_item")}
+          />
+          Per Item
+        </label>
+
+        <label>
+          <input
+            type="radio"
+            value="percentage"
+            checked={splitType === "percentage"}
+            onChange={() => setSplitType("percentage")}
+          />
+          Percentage
+        </label>
+      </section>
     </>
   );
 }
