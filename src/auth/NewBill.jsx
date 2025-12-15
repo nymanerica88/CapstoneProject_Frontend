@@ -288,7 +288,7 @@ export default function NewBill() {
           ).map((row, index) => (
             <div key={index} className="split-row">
               <span>{row.guest}</span>
-              <span>{row.amount.toFixed(2)}</span>
+              <span>${row.amount.toFixed(2)}</span>
             </div>
           ))}
         </section>
