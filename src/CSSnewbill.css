@@ -1,0 +1,160 @@
+/* ====== GLOBAL RESET (ALLOW SCROLLING) ====== */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: auto;
+  min-height: 100%;
+  overflow-y: auto; /* 👈 CRITICAL */
+  font-family: Arial, sans-serif;
+  background-color: #f0f2f5;
+}
+
+/* ====== PAGE WRAPPER ====== */
+.new-bill-page {
+  width: 100%;
+  display: block; /* 👈 NOT flex */
+  padding: 0px 0 80px;
+}
+
+/* ====== SHARED SECTION CARD ====== */
+.bill-details,
+.guest-names,
+.split-type,
+.per_item_split,
+.percentage_split,
+.final-bill-split {
+  background-color: #ffffff;
+  width: 90%;
+  max-width: 800px;
+  margin: 0 auto 25px; /* center + spacing */
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+/* ====== HEADINGS ====== */
+.bill-details h2,
+.guest-names h2,
+.split-type h2,
+.per_item_split h3,
+.percentage_split h3,
+.final-bill-split h3 {
+  margin: 0 0 20px;
+  text-align: center;
+}
+
+/* ====== INPUTS ====== */
+.bill-details input,
+.guest-names input,
+.per_item_split input,
+.percentage_split input,
+.item-row select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+/* ====== RADIO BUTTONS ====== */
+.split-type label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.split-type input[type="radio"] {
+  transform: scale(1.1);
+}
+
+/* ====== ITEM ROWS ====== */
+.item-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 2fr;
+  gap: 10px;
+  margin-bottom: 12px;
+  align-items: center;
+}
+
+/* ====== ADD ITEM BUTTON ====== */
+.per_item_split button {
+  background-color: orange;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+  width: 100%;
+}
+
+.per_item_split button:hover {
+  background-color: darkorange;
+}
+
+/* ====== PERCENTAGE ROWS ====== */
+.percentage-row {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+.percentage-row span {
+  flex: 1;
+  font-weight: bold;
+}
+
+/* ====== FINAL SPLIT ====== */
+.split-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.split-row:last-child {
+  border-bottom: none;
+}
+
+/* ====== SUBMIT BUTTON ====== */
+.final-bill-split button {
+  margin-top: 20px;
+  width: 100%;
+  background-color: orange;
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 6px;
+  font-size: 1.05rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.final-bill-split button:hover {
+  background-color: darkorange;
+}
+
+/* ====== MOBILE ====== */
+@media (max-width: 600px) {
+  .bill-details,
+  .guest-names,
+  .split-type,
+  .per_item_split,
+  .percentage_split,
+  .final-bill-split {
+    padding: 25px 20px;
+    width: 95%;
+  }
+
+  .item-row {
+    grid-template-columns: 1fr;
+  }
+}
