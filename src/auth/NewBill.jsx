@@ -191,6 +191,48 @@ export default function NewBill() {
           Percentage
         </label>
       </section>
+
+      <section>
+        {splitType === "per_item" && (
+          <>
+            <h3>Item Assignments</h3>
+            {items.map((item, index) => (
+              <div key={index} className="item-row">
+                <input
+                  placeholder="item_name"
+                  value={item.name}
+                  onChange={(event) =>
+                    updateItem(index, "name", event.target.value)
+                  }
+                />
+                <input
+                  type="number"
+                  placeholder="quantity"
+                  value={item.quantity}
+                  onChange={(event) =>
+                    updateItem(index, "quantity, event.target.value")
+                  }
+                />
+                <select
+                  value={item.guestIndex}
+                  onChange={(event) =>
+                    updateItem(index, "guestIndex", Number(event.target.value))
+                  }
+                >
+                  {guests.map((guest, guestIndex) => (
+                    <option key={guestIndex} value={guestIndex}>
+                      {guest || "Guest " + (guestIndex + 1)}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            ))}
+            <button type="button" onClick={addItem}>
+              + Add Item
+            </button>
+          </>
+        )}
+      </section>
     </>
   );
 }
