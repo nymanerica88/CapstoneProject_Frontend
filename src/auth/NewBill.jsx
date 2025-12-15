@@ -17,4 +17,24 @@ export default function Bills() {
   ]);
   const [percentages, setPercentages] = useState([]);
   const totalNumber = Number(total) || 0;
+
+  function updateGuest(index, value) {
+    const copy = [...guests];
+    copy[index] = value;
+    setGuests(copy);
+  }
+
+  function updateGuestCount(count) {
+    setGuestCount(count);
+    setGuests(
+      Array.from({ length: count }, function () {
+        return "";
+      })
+    );
+    setPercentages(
+      Array.from({ length: count }, function () {
+        return 0;
+      })
+    );
+  }
 }
