@@ -1,0 +1,205 @@
+/* ====== Page Setup ====== */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f0f2f5;
+  min-height: 100vh;
+  overflow-y: auto;
+}
+
+/* ====== Main Bill Details Container ====== */
+.entire-bill-detail-section {
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  padding: 40px 60px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+
+  width: 95%;
+  max-width: 1200px;
+
+  gap: 30px;
+  margin: 40px auto;
+  box-sizing: border-box;
+}
+
+/* ====== Bill Summary ====== */
+.bill-detail {
+  text-align: center;
+}
+
+.bill-detail h2 {
+  margin-bottom: 10px;
+}
+
+.bill-detail p {
+  margin: 5px 0;
+  font-size: 1rem;
+}
+
+/* ====== Section Containers ====== */
+.bill-splits,
+.bill-items {
+  width: 100%;
+}
+
+/* Section headers */
+.bill-splits h3,
+.bill-items h3 {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+/* ====== Section Divider ====== */
+.bill-splits::before,
+.bill-items::before {
+  content: "";
+  display: block;
+  height: 1px;
+  background-color: #ddd;
+  margin-bottom: 20px;
+}
+
+/* ====== Bill Split Rows ====== */
+.split-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 12px;
+  border-bottom: 1px solid #eee;
+  font-size: 0.95rem;
+}
+
+.split-row span {
+  word-break: break-word;
+}
+
+.split-row:last-child {
+  border-bottom: none;
+}
+
+/* ====== Item Rows (RESTORED TABLE LAYOUT + ACTIONS) ====== */
+.item-row {
+  display: grid;
+  grid-template-columns: 2fr 2fr 0.8fr 1fr auto; /* ⬅️ added action column */
+  align-items: center;
+  gap: 16px;
+
+  padding: 12px 10px;
+  border-bottom: 1px solid #eee;
+  font-size: 0.9rem;
+}
+
+/* 🔑 Flatten item-info so spans align as columns */
+.item-info {
+  display: contents;
+}
+
+.item-info span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.4;
+}
+
+.item-row:last-child {
+  border-bottom: none;
+}
+
+/* ====== Item Actions (Update / Delete buttons) ====== */
+.item-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.item-actions button {
+  background-color: orange;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.item-actions button:hover {
+  background-color: darkorange;
+}
+
+.item-actions .item-delete {
+  background-color: #e5533d;
+}
+
+.item-actions .item-delete:hover {
+  background-color: #c94430;
+}
+
+/* ====== Editing Inputs ====== */
+.item-row input {
+  width: 100%;
+  padding: 6px;
+  font-size: 0.85rem;
+  box-sizing: border-box;
+}
+
+/* ====== BILL ACTIONS (BOTTOM BUTTONS) ====== */
+.bill-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 30px;
+  gap: 20px;
+}
+
+.bill-actions button {
+  background-color: orange;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.bill-actions button:hover {
+  background-color: darkorange;
+  transform: translateY(-1px);
+}
+
+.bill-actions .delete {
+  background-color: #e5533d;
+}
+
+.bill-actions .delete:hover {
+  background-color: #c94430;
+}
+
+/* ====== Mobile Adjustments ====== */
+@media (max-width: 600px) {
+  .entire-bill-detail-section {
+    padding: 30px 20px;
+  }
+
+  .item-row {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .item-actions {
+    justify-content: flex-start;
+  }
+
+  .bill-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
