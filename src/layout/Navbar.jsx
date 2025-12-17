@@ -11,6 +11,11 @@ export default function Navbar() {
     navigate("/");
   };
 
+  const isProfile = pathname === "/profile";
+  const isAddBill = pathname === "bills/new";
+  const isBillDetails =
+    pathname.startsWith("/bills/") && pathname !== "/bills/new";
+
   return (
     <header id="navbar">
       {token ? (
@@ -24,12 +29,15 @@ export default function Navbar() {
       <nav>
         {token ? (
           <>
-            {pathname === "/profile" && (
-              <NavLink to="/bills/new">Add Bill</NavLink>
+            {isProfile && <NavLink to="/bills/new">Add Bill</NavLink>}
+            {isAddBill && <NavLink to="/profile">Profile</NavLink>}
+            {isBillDetails && (
+              <>
+                <NavLink to="/profile">Profile</NavLink>
+                <NavLink to="/bills/new">Add Bill</NavLink>
+              </>
             )}
-            {pathname === "/bills/new" && (
-              <NavLink to="/profile">Profile</NavLink>
-            )}
+
             <button onClick={logoutRedirect}>Log out</button>
           </>
         ) : (
