@@ -11,11 +11,7 @@ export default function Layout() {
         <Navbar />
         <main>
           {location.pathname === "/" && (
-            <img
-              // className="TabTabulationsCover"
-              src={TabTabulations}
-              alt="Project cover"
-            />
+            <img src={TabTabulations} alt="Project cover" />
           )}
         </main>
       </section>
