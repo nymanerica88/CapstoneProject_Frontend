@@ -248,21 +248,6 @@ export default function BillDetails() {
             ))}
           </section>
         )}
-        {/* {bill.type === "per_item" && (
-          <section className="bill-items">
-            <h3>Items</h3>
-            {items.map((item, index) => (
-              <section key={index} className="item-row">
-                <span>{item.guest_name}</span>
-                <span>{item.item_name}</span>
-                <span>{item.quantity}</span>
-                <span>
-                  ${(Number(item.quantity) * Number(item.price)).toFixed(2)}
-                </span>
-              </section>
-            ))}
-          </section>
-        )} */}
         <section className="bill-actions">
           <button className="delete" onClick={handleDeleteBill}>
             Delete Bill
