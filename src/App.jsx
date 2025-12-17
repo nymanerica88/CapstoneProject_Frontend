@@ -4,6 +4,7 @@ import Login from "./auth/Login";
 import Register from "./auth/Register";
 import Profile from "./auth/Profile";
 import NewBill from "./auth/NewBill";
+import BillDetails from "./auth/BillDetails";
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/bills/new" element={<NewBill />} />
+        <Route path="/bills/:id" element={<BillDetails />} />
       </Route>
     </Routes>
   );
