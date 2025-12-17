@@ -17,6 +17,12 @@ export default function BillDetails() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [editingItem, setEditingItem] = useState(null);
+  const [editForm, setEditForm] = useState({
+    item_name: "",
+    quantity: "",
+    price: "",
+  });
 
   useEffect(() => {
     async function loadBill() {
@@ -91,6 +97,68 @@ export default function BillDetails() {
     }
   }
 
+  function editItem(item) {
+    setEditingItem(item.id);
+    setEditForm({
+      item_name: item.item_name,
+      quantity: item.quantity,
+      price: item.price,
+    });
+  }
+
+  async function handleUpdateItem(itemId) {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API}/bills/items/${itemId}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(editForm),
+        }
+      );
+
+      if (!response.ok) throw new Error("Failed to update item");
+      const updatedItem = await response.json();
+
+      setItems((prev) =>
+        prev.map((item) =>
+          item.id === itemId ? { ...item, ...updatedItem } : item
+        )
+      );
+
+      setEditingItem(null);
+    } catch (error) {
+      setError(error.message);
+    }
+  }
+
+  async function handleDeleteItem(itemId) {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this item?"
+    );
+    if (!confirmDelete) return;
+
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API}/bills/items/${itemId}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (!response.ok) throw new Error("Failed to delete item");
+      setItems((prev) => prev.filter((item) => item.id !== itemId));
+    } catch (error) {
+      setError(error.message);
+    }
+  }
+
   if (loading) return <p>Loading Bill...</p>;
   if (error) return <p>{error}</p>;
   if (!bill) return <p> Bill not found</p>;
@@ -112,27 +180,89 @@ export default function BillDetails() {
         <section className="bill-splits">
           <h3>Bill Split</h3>
           {splits.map((split) => (
-            <div key={split.id} className="split-row">
+            <section key={split.id} className="split-row">
               <span>{split.guest_name}</span>
               <span>${Number(split.amount_owed).toFixed(2)}</span>
-            </div>
+            </section>
           ))}
         </section>
         {bill.type === "per_item" && (
           <section className="bill-items">
             <h3>Items</h3>
+
+            {items.map((item) => (
+              <section key={item.id} className="item-row">
+                {" "}
+                {editingItem === item.id ? (
+                  <>
+                    <input
+                      value={editForm.item_name}
+                      onChange={(event) =>
+                        setEditForm({
+                          ...editForm,
+                          item_name: event.target.value,
+                        })
+                      }
+                    />
+                    <input
+                      type="number"
+                      value={editForm.quantity}
+                      onChange={(event) =>
+                        setEditForm({
+                          ...editForm,
+                          quantity: event.target.value,
+                        })
+                      }
+                    />
+                    <input
+                      type="number"
+                      value={editForm.price}
+                      onChange={(event) =>
+                        setEditForm({ ...editForm, price: event.target.value })
+                      }
+                    />
+
+                    <button onClick={() => handleUpdateItem(item.id)}>
+                      Save
+                    </button>
+                    <button onClick={() => setEditingItem(null)}>Cancel</button>
+                  </>
+                ) : (
+                  <>
+                    <section className="item-info">
+                      <span>{item.guest_name}</span>
+                      <span>{item.item_name}</span>
+                      <span>{item.quantity}</span>
+                      <span>${(item.quantity * item.price).toFixed(2)}</span>
+                    </section>
+
+                    <section className="item-actions">
+                      <button onClick={() => editItem(item)}>Update</button>
+                      <button onClick={() => handleDeleteItem(item.id)}>
+                        Delete
+                      </button>
+                    </section>
+                  </>
+                )}
+              </section>
+            ))}
+          </section>
+        )}
+        {/* {bill.type === "per_item" && (
+          <section className="bill-items">
+            <h3>Items</h3>
             {items.map((item, index) => (
-              <div key={index} className="item-row">
+              <section key={index} className="item-row">
                 <span>{item.guest_name}</span>
                 <span>{item.item_name}</span>
                 <span>{item.quantity}</span>
                 <span>
                   ${(Number(item.quantity) * Number(item.price)).toFixed(2)}
                 </span>
-              </div>
+              </section>
             ))}
           </section>
-        )}
+        )} */}
         <section className="bill-actions">
           <button className="delete" onClick={handleDeleteBill}>
             Delete Bill
