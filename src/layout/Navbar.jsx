@@ -12,7 +12,7 @@ export default function Navbar() {
   };
 
   const isProfile = pathname === "/profile";
-  const isAddBill = pathname === "bills/new";
+  const isAddBill = pathname === "/bills/new";
   const isBillDetails =
     pathname.startsWith("/bills/") && pathname !== "/bills/new";
 
