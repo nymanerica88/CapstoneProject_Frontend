@@ -45,6 +45,52 @@ export default function BillDetails() {
     loadBill();
   }, [id, token]);
 
+  async function handleMarkPaid() {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API}/bills/${id}/pay`,
+        {
+          method: "PATCH",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (!response.ok) throw new Error("Failed to mark bill as paid");
+
+      const updatedBill = await response.json();
+      setBill(updatedBill);
+    } catch (error) {
+      setError(error.message);
+      console.log(error.message);
+      throw error;
+    }
+  }
+
+  async function handleDeleteBill() {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to permanently delete this bill?"
+    );
+
+    if (!confirmDelete) return;
+
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API}/bills/${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (!response.ok) throw new Error("Failed to delete bill");
+
+      navigate("/profile");
+    } catch (error) {
+      setError(error.message);
+    }
+  }
+
   if (loading) return <p>Loading Bill...</p>;
   if (error) return <p>{error}</p>;
   if (!bill) return <p> Bill not found</p>;
@@ -87,6 +133,19 @@ export default function BillDetails() {
             ))}
           </section>
         )}
+        <section className="bill-actions">
+          <button className="delete" onClick={handleDeleteBill}>
+            Delete Bill
+          </button>
+
+          <button
+            className={`mark-paid ${bill.is_paid ? "paid" : ""}`}
+            onClick={handleMarkPaid}
+            disabled={bill.is_paid}
+          >
+            {bill.is_paid ? "Paid" : "Mark as Paid"}
+          </button>
+        </section>
       </section>
     </>
   );
