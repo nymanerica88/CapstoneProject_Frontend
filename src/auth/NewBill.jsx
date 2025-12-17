@@ -212,8 +212,8 @@ export default function NewBill() {
           </label>
         </section>
 
-        <section className="per_item_split">
-          {splitType === "per_item" && (
+        {splitType === "per_item" && (
+          <section className="per_item_split">
             <>
               <h3>Item Assignments</h3>
               {items.map((item, index) => (
@@ -264,10 +264,10 @@ export default function NewBill() {
                 + Add Item
               </button>
             </>
-          )}
-        </section>
-        <section className="percentage_split">
-          {splitType === "percentage" && (
+          </section>
+        )}
+        {splitType === "percentage" && (
+          <section className="percentage_split">
             <>
               <h3>Percentage Assignments</h3>
               {guests.map((guestName, index) => (
@@ -287,8 +287,8 @@ export default function NewBill() {
                 </div>
               ))}
             </>
-          )}
-        </section>
+          </section>
+        )}
         <section className="final-bill-split">
           <h3>Bill Split</h3>
           {(splitType === "even"
@@ -302,6 +302,8 @@ export default function NewBill() {
               <span>${row.amount.toFixed(2)}</span>
             </div>
           ))}
+
+          <button onClick={handleSubmit}>Add New Bill</button>
         </section>
       </section>
     </>
