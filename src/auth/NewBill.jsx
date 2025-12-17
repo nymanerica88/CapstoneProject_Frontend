@@ -41,7 +41,6 @@ export default function NewBill() {
       );
       return [userGuest, ...additionalGuests];
     });
-    // setGuests(Array.from({ length: count }, () => ""));
     setPercentages(Array.from({ length: count }, () => 0));
   };
 
@@ -81,10 +80,6 @@ export default function NewBill() {
         totals[item.guestIndex] += price * quantity;
       }
     });
-    // items.forEach((item) => {
-    //   const itemTotal = Number(item.price || 0) * Number(item.quantity || 0);
-    //   totals[item.guestIndex] += itemTotal;
-    // });
 
     return Object.entries(totals).map(([index, amount]) => ({
       guest: guests[index],
@@ -217,7 +212,7 @@ export default function NewBill() {
             <>
               <h3>Item Assignments</h3>
               {items.map((item, index) => (
-                <div key={index} className="item-row">
+                <section key={index} className="item-row">
                   <input
                     placeholder="item_name"
                     value={item.name}
@@ -258,7 +253,7 @@ export default function NewBill() {
                       </option>
                     ))}
                   </select>
-                </div>
+                </section>
               ))}
               <button type="button" onClick={addItem}>
                 + Add Item
@@ -271,7 +266,7 @@ export default function NewBill() {
             <>
               <h3>Percentage Assignments</h3>
               {guests.map((guestName, index) => (
-                <div key={index} className="percentage-row">
+                <section key={index} className="percentage-row">
                   <span>{guestName}</span>
                   <input
                     type="number"
@@ -284,7 +279,7 @@ export default function NewBill() {
                       setPercentages(copy);
                     }}
                   />
-                </div>
+                </section>
               ))}
             </>
           </section>
@@ -297,10 +292,10 @@ export default function NewBill() {
             ? perItemSplit
             : percentageSplit
           ).map((row, index) => (
-            <div key={index} className="split-row">
+            <section key={index} className="split-row">
               <span>{row.guest}</span>
               <span>${row.amount.toFixed(2)}</span>
-            </div>
+            </section>
           ))}
 
           <button onClick={handleSubmit}>Add New Bill</button>
