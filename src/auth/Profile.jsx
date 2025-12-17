@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "./AuthContext";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import AvatarImageDefault from "../cover/AvatarImageDefault.png";
 import "../CSSprofile.css";
 import "../CSSnavbar.css";
 
 export default function Profile() {
   const { token, user } = useAuth();
+  const navigate = useNavigate();
 
   const [bills, setBills] = useState([]);
   const [totalOwed, setTotalOwed] = useState(0);
@@ -85,14 +86,9 @@ export default function Profile() {
       <section className="profile-bills">
         {bills.map((bill) => (
           <button
-            key={bill.ref_num}
+            key={bill.bill_id}
             className="bill-card"
-            onClick={() => {
-              console.log("Clicked bill:", bill.ref_num);
-              // THIS IS A PLACEHOLDER -- the route for bill details hasn't been
-              // created yet; navigate(`/bills/${bill.ref_num}`) -- unless I change
-              // the bill ref num is changed to the bill_id number instead;
-            }}
+            onClick={() => navigate(`/bills/${bill.bill_id}`)}
           >
             <span className="bill-ref"> Ref #: {bill.ref_num}</span>
             <span className="bill-amount">
