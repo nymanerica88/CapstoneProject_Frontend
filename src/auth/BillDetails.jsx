@@ -24,30 +24,31 @@ export default function BillDetails() {
     price: "",
   });
 
-  useEffect(() => {
-    async function loadBill() {
-      try {
-        const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/bills/${id}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+  async function loadBill() {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/bills/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
-        if (!response.ok) throw new Error("Failed to load bill");
+      if (!response.ok) throw new Error("Failed to load bill");
 
-        const data = await response.json();
-        setBill(data.bill);
-        setSplits(data.splits);
-        setItems(data.items);
-      } catch (error) {
-        setError(error.message);
-      } finally {
-        setLoading(false);
-      }
+      const data = await response.json();
+      setBill(data.bill);
+      setSplits(data.splits);
+      setItems(data.items);
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoading(false);
     }
+  }
+
+  useEffect(() => {
     loadBill();
   }, [id, token]);
 
@@ -124,13 +125,16 @@ export default function BillDetails() {
       );
 
       if (!response.ok) throw new Error("Failed to update item");
-      const updatedItem = await response.json();
 
-      setItems((prev) =>
-        prev.map((item) =>
-          item.id === itemId ? { ...item, ...updatedItem } : item
-        )
-      );
+      await response.json();
+
+      await loadBill();
+      // const updatedItem = await response.json();
+      // setItems((prev) =>
+      //   prev.map((item) =>
+      //     item.id === itemId ? { ...item, ...updatedItem } : item
+      //   )
+      // );
 
       setEditingItem(null);
     } catch (error) {
