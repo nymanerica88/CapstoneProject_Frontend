@@ -28,7 +28,7 @@ export default function BillDetails() {
     async function loadBill() {
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_API}/bills/${id}`,
+          `${import.meta.env.VITE_API_URL}/bills/${id}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -54,7 +54,7 @@ export default function BillDetails() {
   async function handleMarkPaid() {
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API}/bills/${id}/pay`,
+        `${import.meta.env.VITE_API_URL}/bills/${id}/pay`,
         {
           method: "PATCH",
           headers: {
@@ -82,12 +82,15 @@ export default function BillDetails() {
     if (!confirmDelete) return;
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API}/bills/${id}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/bills/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       if (!response.ok) throw new Error("Failed to delete bill");
 
@@ -109,7 +112,7 @@ export default function BillDetails() {
   async function handleUpdateItem(itemId) {
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API}/bills/items/${itemId}`,
+        `${import.meta.env.VITE_API_URL}/bills/items/${itemId}`,
         {
           method: "PATCH",
           headers: {
@@ -143,7 +146,7 @@ export default function BillDetails() {
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API}/bills/items/${itemId}`,
+        `${import.meta.env.VITE_API_URL}/bills/items/${itemId}`,
         {
           method: "DELETE",
           headers: {

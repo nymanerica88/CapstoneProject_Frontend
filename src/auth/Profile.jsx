@@ -30,11 +30,14 @@ export default function Profile() {
 
     async function loadProfile() {
       try {
-        const response = await fetch(`${import.meta.env.VITE_API}/profile`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/profile`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
         if (!response.ok) {
           const text = await response.text();

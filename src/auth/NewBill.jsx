@@ -119,7 +119,7 @@ export default function NewBill() {
           : [],
     };
 
-    const response = await fetch(`${import.meta.env.VITE_API}/bills`, {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/bills`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
